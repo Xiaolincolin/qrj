@@ -1,0 +1,326 @@
+<html>
+<head>
+<script type="text/javaScript">
+confirm("明宝贝，欢迎来到爱情小屋~");
+</script>
+    {% load static %}
+<meta charset="utf-8">
+<title>I LOVE YOU</title>
+<style type="text/css">
+html{
+background-color:pink;
+}
+a{
+color:camel
+}
+div>h3{
+	color:maroon;
+}
+div>h4{
+	color:purple;
+}
+div>h5{
+	color:teal;
+}
+div>h6{
+	color:crimson;
+}
+ul{
+color:purple;
+}
+form{
+color:red;
+}
+div>p{
+color:red;
+}
+#tab{	
+overflow:hidden;
+width:150px; 
+height:160px;
+position:relative; 
+float:right;
+}
+#tab>img{
+width:50px;
+height:50px;
+}
+
+#a{
+width: 250px;
+height:20px;
+position: absolute;
+left:48%;
+top:30px;
+background-color: pink;
+text-align: center;
+}
+#no{
+position: absolute;
+left:250px;
+top: 180px;
+}
+audio{
+display: none;
+}
+
+#canvas{
+height:100%;
+width:100%;
+left:415px;
+position:fixed;
+}
+</style>
+</head>
+<div>
+<body onresize="tellSize()">
+
+<canvas id="canvas" ></canvas>
+
+<audio autoplay="autoplay" controls="controls"loop="loop" preload="auto"
+     src="love.mp3">
+</audio>
+
+<div id="a" clas="a" style="color: red;">
+   	 <span>DO you want to marry with  me?</span><br />
+     <button onclick="b()">yes</button>  <br />
+     <button onmouseover="a()" id="no">no</button>
+</div>
+
+<div id="tab">
+    <img src="{% static 'images/all/1.jpg' %}"/>
+	<img src="{% static 'images/all/2.jpg' %}"/>
+	<img src="{% static 'images/all/3.jpg' %}"/>
+	<img src="{% static 'images/all/4.jpg' %}"/>
+	<img src="{% static 'images/all/5.jpg' %}"/>
+</div>
+
+<table>
+<ul>
+钟爱三句箴言：
+<ol>
+<li><button onclick="three('明宝贝，我在想你')">悄悄地告诉你第一句</li><br/>
+<li><button onclick="three('明宝贝，我爱你')">悄悄地告诉你第二句</li><br/>
+<li><button onclick="three('明宝贝，爱你，想你，恋你，念你！')">悄悄地告诉你第三句</li><br/>
+</ol>
+</ul>
+</table>
+
+<hr/>
+<br/>
+<button onclick="play(this)">石头</button>
+<button onclick="play(this)">剪刀</button>
+<button onclick="play(this)">布</button>
+<br/>
+<p id="msg">猜拳游戏<p/>
+
+<a>猜数字小游戏：<a><button onclick="youxi()">开始游戏</button><p/>
+<a href="{% url 'xw2' %}"><button>2048小游戏</button></a>
+<a href="{% url 'xw3' %}"><button>别踩粉块儿</button></a>
+<a href="{% url 'xw4' %}"><button>明宝贝的喵</button></a>
+<a href="{% url 'xw5' %}"><button>明宝贝的象</button></a>
+<a href="{% url 'xw6' %}"><button>彩色字</button></a>
+
+<script>
+    window.onload = function(){
+        var images = document.getElementsByTagName('img');
+        var pos = 0;
+        var len = images.length;
+        setInterval(function(){
+            images[pos].style.display = 'none';
+            pos = ++pos == len ? 0 : pos;
+            images[pos].style.display = 'inline';
+        },3000);
+    };
+</script>
+
+<script>
+   function a(){
+   var no = document.getElementById("no");
+   no.style.left = Math.floor(Math.random()*250)+"px";
+   no.style.top = Math.floor(Math.random()*180)+"px";
+}
+   function b(){
+   alert("明宝贝！爱你么么哒~哈哈")
+}
+</script>
+
+<script type="text/javaScript">
+function play(btn){
+	var msg = document.getElementById("msg");
+	var playerChoice = btn.innerHTML;
+	var num = parseInt(Math.random()*3);
+	var aiChoice;
+	if(num==0){
+		aiChoice="石头";
+	}else if(num==1){
+		aiChoice="剪刀";
+	}else{
+		aiChoice="布";
+	}
+	
+	if((playerChoice=="石头" && aiChoice=="剪刀") || (playerChoice=="剪刀" && aiChoice=="布") || (playerChoice=="布" && aiChoice=="石头")){
+		msg.innerHTML = "你出的是："+playerChoice+" ，电脑出的是："+aiChoice+" ，恭喜你赢了！";
+	}else if((aiChoice=="石头" && playerChoice=="剪刀") || (aiChoice=="剪刀" && playerChoice=="布") || (aiChoice=="布" && playerChoice=="石头")){
+		msg.innerHTML = "你出的是："+playerChoice+" ，电脑出的是："+aiChoice+" ，你输了！";
+	}else{
+		msg.innerHTML = "你出的是："+playerChoice+" ，电脑出的是："+aiChoice+" ，平局！";
+	}
+	
+}
+
+function three(name){
+	alert("哥哥："+name+"!");
+}
+
+var i = 1;
+function tellSize(){
+if(i==3 || i==6 || i==12){
+alert("你也太无聊了...");
+}else{
+alert("你调整了页面大小，这是第"+i+"次");
+}
+i++;
+}
+</script>
+
+<script type="text/JavaScript">
+function youxi(){
+ var x;
+ x=parseInt(Math.random()*(1000-1))+1;
+ for(var i=0;i<10;i++){
+ var num=prompt("请输入(0~1000)你猜测的任意数字","");
+ if (num!=null && num!=""){
+ if(num==x){
+  switch(i){
+  case 0:
+   alert('真神啦,恭喜你猜对啦!快去买彩票');
+   i=10;
+   break;
+  case 1:
+   alert('厉害,恭喜你猜对啦!幸运日');
+   i=10;
+   break;
+  case 2:
+   alert('真棒,恭喜你猜对啦!出众的一天');
+   i=10;
+   break;
+  case 3:
+   alert('不错,对啦!祝你开心');
+   i=10;
+   break;
+  case 4:
+   alert('不容易,猜对啦!');
+   i=10;
+   break;
+  case 5:
+   alert('还算将就啦,猜对了!');
+   i=10;
+   break;
+  case 6:
+   alert('有点慢呦,猜对啦!');
+   i=10;
+   break;
+  case 7:
+   alert('下次再快点,猜对啦!');
+   i=10;
+   break;
+  case 8:
+   alert('还好赶上了,对啦!小幸运');
+   i=10;
+   break;
+  case 9:
+   alert('最后机会,终于对啦!继续努力');
+   i=10;
+   break;
+  }
+ }
+ if(i==9){
+  alert('笨蛋，10次都猜不对！');
+ }
+ if(num>x){
+  document.write("您已经猜了" + eval(i+1) + "次," + num +"," + "大了！<br>");
+ }
+ if(num<x){
+  document.write("您已经猜了" + eval(i+1) + "次," + num +"," + "小了！<br>");
+ }
+  }else{
+ alert('是否退出游戏？'); 
+ break;
+ }
+ }
+ }
+</script>
+
+<script>
+var canvas = document.querySelector('#canvas');
+var ctx = canvas.getContext("2d");
+var starlist = [];
+function init(){
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+}
+init();
+window.onresize = init;
+canvas.addEventListener('mousemove',function(e){
+	starlist.push(new Star(e.offsetX,e.offsetY));
+	console.log(starlist)
+})
+function random(min,max){
+	return Math.floor((max-min)*Math.random()+ min);
+}
+function Star(x,y){
+	this.x = x;
+	this.y = y;
+	this.vx = (Math.random()-0.5)*2.5;
+	this.vy = (Math.random()-0.5)*2.5;
+	this.color = 'rgb('+random(0,200)+','+random(0,200)+','+random(0,200)+')';
+	this.a = 1;
+	console.log(this.color);
+	this.draw();
+}
+Star.prototype={
+	draw:function(){
+		ctx.beginPath();
+		ctx.fillStyle = this.color;
+		ctx.globalCompositeOperation='lighter'
+		ctx.globalAlpha= this.a;
+		ctx.arc(this.x,this.y,10,0,Math.PI*2,false);
+		ctx.fill();
+		this.updata();
+	},
+	updata(){
+		this.x+=this.vx;
+		this.y+=this.vy;
+		this.a*=.98;
+	}
+}
+console.log(new Star(150,200));
+function render(){
+	ctx.clearRect(0,0,canvas.width,canvas.height)
+	
+	starlist.forEach((item,i)=>{
+		item.draw();
+		if(item.a<0.05){
+			starlist.splice(i,1);
+		}
+	})
+	requestAnimationFrame(render);
+}
+render();	
+</script>
+
+<hr/>
+<h6>世上最浪漫和最自私的话就是：你是我一个人的</h6>
+<h5>其实全世界最幸福的童话，不过是，与你一起度过柴米油盐的岁月</h5>
+<h4> 见不到你的时候，心里有好多话想对你说，在你身边时，觉得静静地陪着你，即使不说话，也很好</h4>
+<h3>你的一生我只借一程，这一程便是余生</h3>
+<h4>你在的时候，你就是全世界，你不在的时候，全世界都是你</h4>
+<h5>你陪着我的时候，我从没羡慕过任何人</h5>
+<h6>即便不能每天在一起日出而作 日入而息，但我也要问你粥可温，期待与你立黄昏</h6>
+<hr/>
+<\(^o^)/~><br/>
+<a href="{% url 'index' %}"><button>明宝贝，这里可以出门</button></a>
+</body>
+</div>
+</html>
